@@ -6,7 +6,7 @@ orderrouter.post('/orders', orderController.createOrder);
 orderrouter.get('/orders', orderController.getAllOrders);
 orderrouter.get('/orders/:orderId/order-status', orderController.getOrderStatus);
 orderrouter.get('/orders/:orderId/payment-status', orderController.getPaymentStatus);
-orderrouter.put('/:orderId', orderController.updateOrder);
-orderrouter.delete('/:orderId', orderController.deleteOrder);
+orderrouter.put('/orders/:orderId', orderController.updateOrder);
+orderrouter.delete('/orders/:orderId', orderController.deleteOrder);
 
 module.exports = orderrouter;

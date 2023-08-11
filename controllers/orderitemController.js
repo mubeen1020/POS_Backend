@@ -37,7 +37,7 @@ exports.updateOrderItem = (req, res) => {
     const orderItemId = req.params.orderItemId;
     const updatedOrderItem = req.body;
   
-    const query = 'UPDATE order_items SET ? WHERE id = ?';
+    const query = 'UPDATE order_item SET ? WHERE id = ?';
     connection.query(query, [updatedOrderItem, orderItemId], (error, results) => {
       if (error) {
         return res.status(500).json({
@@ -55,7 +55,7 @@ exports.updateOrderItem = (req, res) => {
   exports.deleteOrderItem = (req, res) => {
     const orderItemId = req.params.orderItemId;
   
-    const query = 'DELETE FROM order_items WHERE id = ?';
+    const query = 'DELETE FROM order_item WHERE id = ?';
     connection.query(query, orderItemId, (error, results) => {
       if (error) {
         return res.status(500).json({

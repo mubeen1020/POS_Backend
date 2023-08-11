@@ -48,39 +48,40 @@ exports.getAllOrderStatus = (req, res) => {
         });
       }
   
-      if (result.affectedRows === 0) {
-        return res.status(404).json({
-          message: 'Customer not found.',
-        });
-      }
+     
   
       res.json({
         message: 'Customer deleted successfully!',
-        customerId,
+        result,
       });
     });
   };
   
     
-    exports.updateOrderStatus = (req, res) => {
-        const orderStatusId = req.params.orderStatusId;
-        const updatedOrderStatus = req.body;
-    
-      connection.query('UPDATE order_status SET ? WHERE id = ?', [updatedOrderStatus, orderStatusId], (error, result) => {
-        if (error) {
-          return res.status(500).json({
-            message: 'An error occurred while updating the customer.',
-            error,
-          });
-        }
-        if (result.affectedRows === 0) {
-          return res.status(404).json({
-            message: 'Customer not found.',
-          });
-        }
-        res.json({
-          message: 'Customer updated successfully!',
-          result,
+  exports.updateOrderStatus = (req, res) => {
+    const orderStatusId = req.params.orderStatusId;
+    const updatedOrderStatus = req.body;
+    const query = 'UPDATE order_status SET ? WHERE id = ?';
+  
+    connection.query(query, [updatedOrderStatus, orderStatusId], (error, result) => {
+      if (error) {
+        return res.status(500).json({
+          message: 'An error occurred while updating the order status.',
+          error,
         });
+      }
+  
+      // Check if any rows were updated
+      // if (result.affectedRows === 0) {
+      //   return res.status(404).json({
+      //     message: 'Order status not found.',
+      //   });
+      // }
+  
+      res.json({
+        message: 'Order status updated successfully!',
+        updatedOrderStatus,  // Return the updated order status
       });
-    };
+    });
+  };
+  

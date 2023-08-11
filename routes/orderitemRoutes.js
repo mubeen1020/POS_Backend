@@ -5,8 +5,8 @@ const orderitemrouter = express.Router();
 
 orderitemrouter.post('/order-items', orderItemController.createOrderItem);
 orderitemrouter.get('/order-items', orderItemController.getAllOrderItems);
-orderitemrouter.put('/:orderItemId', orderItemController.updateOrderItem);
-orderitemrouter.delete('/:orderItemId', orderItemController.deleteOrderItem);
+orderitemrouter.put('/order-items/:orderItemId', orderItemController.updateOrderItem);
+orderitemrouter.delete('/order-items/:orderItemId', orderItemController.deleteOrderItem);
 
 
 module.exports = orderitemrouter;

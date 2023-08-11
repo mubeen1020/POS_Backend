@@ -66,3 +66,46 @@ exports.getFishCutForPacket = (req, res) => {
     });
   });
 };
+
+exports.updatePacket = (req, res) => {
+  const packetId = req.params.id;
+  const updatedPacket = req.body;
+  const query = 'UPDATE packets SET ? WHERE id = ?'; // Assuming 'packets' is the correct table name
+
+  connection.query(query, [updatedPacket, packetId], (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        message: 'An error occurred while updating the packet.',
+        error,
+      });
+    }
+
+    res.json({
+      message: 'Packet updated successfully!',
+      updatedPacket,
+    });
+  });
+};
+
+
+exports.deletePacket = (req, res) => {
+  const packetId = req.params.id;
+
+  const deleteQuery = 'DELETE FROM packets WHERE id = ?';
+
+  connection.query(deleteQuery, [packetId], (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        message: 'An error occurred while deleting the packet.',
+        error,
+      });
+    }
+
+    res.json({
+      message: 'Packet deleted successfully!',
+      result,
+    });
+  });
+};
+
+
