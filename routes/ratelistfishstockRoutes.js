@@ -4,5 +4,7 @@ const rateListFishStockController = require('../controllers/ratelistfishstockCon
 
 rateListFishStockrouter.post('/rate-lists-fish-stock', rateListFishStockController.createRateListFishStock);
 rateListFishStockrouter.get('/rate-lists-fish-stock', rateListFishStockController.getAllRateListsFishStock);
+rateListFishStockrouter.put('/rate-lists-fish-stock/:id', rateListFishStockController.updateRateListsFishStock);
+rateListFishStockrouter.delete('/rate-lists-fish-stock/:id', rateListFishStockController.deleteRateListsFishStock);
 
 module.exports = rateListFishStockrouter;

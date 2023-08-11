@@ -32,3 +32,44 @@ exports.getAllRateLists = (req, res) => {
     });
   });
 };
+
+exports.updateRateList = (req, res) => {
+  const RateListId = req.params.id;
+  const updatedRateList = req.body;
+  const query = 'UPDATE rate_lists SET ? WHERE id = ?'; // Assuming 'packets' is the correct table name
+
+  connection.query(query, [updatedRateList, RateListId], (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        message: 'An error occurred while updating the rate lists.',
+        error,
+      });
+    }
+
+    res.json({
+      message: 'rate lists updated successfully!',
+      updatedRateList,
+    });
+  });
+};
+
+
+exports.deleteRateList= (req, res) => {
+  const RateListId = req.params.id;
+
+  const deleteQuery = 'DELETE FROM rate_lists WHERE id = ?';
+
+  connection.query(deleteQuery, [RateListId], (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        message: 'An error occurred while deleting the rate lists.',
+        error,
+      });
+    }
+
+    res.json({
+      message: 'rate lists deleted successfully!',
+      result,
+    });
+  });
+};

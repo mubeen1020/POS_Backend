@@ -32,3 +32,44 @@ exports.getAllPaymentMethods = (req, res) => {
     });
   });
 };
+
+exports.updatePaymentMethods = (req, res) => {
+  const PaymentMethodsId = req.params.id;
+  const updatedPaymentMethods = req.body;
+  const query = 'UPDATE payment_methods SET ? WHERE id = ?'; // Assuming 'packets' is the correct table name
+
+  connection.query(query, [updatedPaymentMethods, PaymentMethodsId], (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        message: 'An error occurred while updating the PaymentMethods.',
+        error,
+      });
+    }
+
+    res.json({
+      message: 'PaymentMethods updated successfully!',
+      updatedPaymentMethods,
+    });
+  });
+};
+
+
+exports.deletePaymentMethods = (req, res) => {
+  const PaymentMethodsId = req.params.id;
+
+  const deleteQuery = 'DELETE FROM payment_methods WHERE id = ?';
+
+  connection.query(deleteQuery, [PaymentMethodsId], (error, result) => {
+    if (error) {
+      return res.status(500).json({
+        message: 'An error occurred while deleting the PaymentMethods.',
+        error,
+      });
+    }
+
+    res.json({
+      message: 'PaymentMethods deleted successfully!',
+      result,
+    });
+  });
+};
